@@ -15,7 +15,6 @@ function createStore(reducer) {
     const subscribe = (listener) => listeners.push(listener)
     const dispatch = (action) => {
         state = reducer(state, action)
-        console.log(listeners)
         listeners.forEach((listener) => {
             listener()
         })

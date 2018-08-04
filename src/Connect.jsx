@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 
-export default (mapStateToProps) => (WrappedComponent) => {
+export default (mapStateToProps, mapDispatchToProps) => (WrappedComponent) => {
     class Connect extends Component {
         static contextTypes = {
             store: PropTypes.object
@@ -21,11 +21,13 @@ export default (mapStateToProps) => (WrappedComponent) => {
 
         _updateProps() {
             const { store } = this.context
-            console.log(store)
-            const stateProps = mapStateToProps(store.getState(), this.props)
+            const stateProps = mapStateToProps ? mapStateToProps(store.getState(), this.props) : {}
+            //注意此处是取store.dispatch函数指针传入mapDispatchToProps
+            const dispatchProps = mapDispatchToProps ? mapDispatchToProps(store.dispatch, this.props) : {}
             this.setState({
                 allProps: {
                     ...stateProps,
+                    ...dispatchProps,
                     ...this.props
                 }
             })
