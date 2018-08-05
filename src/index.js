@@ -6,6 +6,8 @@ import registerServiceWorker from './registerServiceWorker';
 import Header from './Header';
 import Content from './Content'
 import PropTypes from 'prop-types'
+import { Provider } from "./react-redux";
+
 
 function createStore(reducer) {
     let state = null
@@ -43,12 +45,6 @@ const store = createStore(ThemeReducer)
 
 
 class Index extends Component {
-    static childContextTypes = {
-        store: PropTypes.object
-    }
-    getChildContext() {
-        return { store }
-    }
     render() {
         return (
             <div>
@@ -61,5 +57,10 @@ class Index extends Component {
 
 
 
-ReactDOM.render(<Index />, document.getElementById('root'));
+ReactDOM.render(
+    <Provider store={store}>
+        <Index />
+    </Provider>,
+    document.getElementById('root')
+);
 registerServiceWorker();

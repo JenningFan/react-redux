@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Connect from './Connect';
+import { connect } from './react-redux'
 
 class ThemeSwitch extends Component {
     static propTypes = {
@@ -39,5 +39,5 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         }
     }
 }
-ThemeSwitch = Connect(mapStateToProps, mapDispatchToProps)(ThemeSwitch)
+ThemeSwitch = connect(mapStateToProps, mapDispatchToProps)(ThemeSwitch)
 export default ThemeSwitch
