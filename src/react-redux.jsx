@@ -23,6 +23,8 @@ export const connect =  (mapStateToProps, mapDispatchToProps) => (WrappedCompone
             const { store } = this.context
             //因为每个组件关注的共享数据都各不相同，因而需要mapStateToProps函数告诉Connect组件去store的state中取哪些数据
             const stateProps = mapStateToProps ? mapStateToProps(store.getState(), this.props) : {}
+            console.log(store.getState())
+            console.log(stateProps)
             //注意此处是取store.dispatch函数指针传入mapDispatchToProps
             const dispatchProps = mapDispatchToProps ? mapDispatchToProps(store.dispatch, this.props) : {}
             this.setState({

@@ -6,28 +6,30 @@ import registerServiceWorker from './registerServiceWorker';
 import Header from './Header';
 import Content from './Content'
 import PropTypes from 'prop-types'
-import { Provider } from "./react-redux";
+import { Provider } from "react-redux";
+import { createStore } from 'redux';
+import { usersReducer, UsersList } from './User';
 
 
-function createStore(reducer) {
-    let state = null
-    const listeners = []
+// function createStore(reducer) {
+//     let state = null
+//     const listeners = []
 
-    const getState = () => state
-    const subscribe = (listener) => listeners.push(listener)
-    const dispatch = (action) => {
-        state = reducer(state, action)
-        listeners.forEach((listener) => {
-            listener()
-        })
-    }
-    dispatch({})
-    return {
-        getState,
-        dispatch,
-        subscribe
-    }
-}
+//     const getState = () => state
+//     const subscribe = (listener) => listeners.push(listener)
+//     const dispatch = (action) => {
+//         state = reducer(state, action)
+//         listeners.forEach((listener) => {
+//             listener()
+//         })
+//     }
+//     dispatch({})
+//     return {
+//         getState,
+//         dispatch,
+//         subscribe
+//     }
+// }
 
 function ThemeReducer(state, action) {
     if (!state) {
@@ -41,7 +43,9 @@ function ThemeReducer(state, action) {
     }
 }
 
-const store = createStore(ThemeReducer)
+//const store = createStore(ThemeReducer)
+const store = createStore(usersReducer)
+console.log(store.getState())
 
 
 class Index extends Component {
@@ -57,10 +61,16 @@ class Index extends Component {
 
 
 
+// ReactDOM.render(
+//     <Provider store={store}>
+//         <Index />
+//     </Provider>,
+//     document.getElementById('root')
+// );
 ReactDOM.render(
     <Provider store={store}>
-        <Index />
+        <UsersList />
     </Provider>,
     document.getElementById('root')
-);
+)
 registerServiceWorker();
