@@ -30,6 +30,7 @@ import { usersReducer, UsersList } from './User';
 //         subscribe
 //     }
 // }
+console.log(React, Component === React.Component)
 
 function ThemeReducer(state, action) {
     if (!state) {
@@ -45,7 +46,7 @@ function ThemeReducer(state, action) {
 
 //const store = createStore(ThemeReducer)
 const store = createStore(usersReducer)
-console.log(store.getState())
+
 
 
 class Index extends Component {

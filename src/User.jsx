@@ -1,5 +1,5 @@
-import { connect } from "./react-redux";
-import React, { Component } from 'react'
+import { connect } from "react-redux";
+import React, { Component } from 'react';
 
 const usersReducer = (state, action) => {
     if (!state) {
@@ -37,7 +37,7 @@ class User extends Component {
                 <div>Name: { user.username }</div>
                 <div>Age: { user.age }</div>
                 <div>Gender: { user.gender }</div>
-                <button onClick={ onDeleteUser(index) }>删除</button>
+                <button onClick={ () => {onDeleteUser(index)} }>删除</button>
             </div>
         )
     }
@@ -54,18 +54,21 @@ class UsersList extends Component {
     }
 
     handleUserChange(event) {
+        console.log(typeof event.target.value, event.target.value)
         this.setState({
             username: event.target.value
         })
     }
 
     handleAgeChange(event) {
+        console.log(typeof event.target.value, event.target.value)
         this.setState({
             age: event.target.value
         })
     }
 
     handleGenderSelect(event) {
+        console.log(typeof event.target.value, event.target.value)
         this.setState({
             gender: event.target.value
         })
@@ -81,14 +84,14 @@ class UsersList extends Component {
             <div>
                 {/* 输入用户信息，点击“新增”按钮可以增加用户 */}
                 <div className='add-user'>
-                    <div>Username: <input type='text' onChange={this.handleUserChange.bind(this)} /></div>
+                    <div>Username: <input type='text'  onChange={this.handleUserChange.bind(this)} /></div>
                     <div>Age: <input type='number' onChange={this.handleAgeChange.bind(this)} /></div>
                     <div>
                         Gender:
                         <label>Male: <input type='radio' name='gender' value='male' onChange={this.handleGenderSelect.bind(this)} /></label>
                         <label>Female: <input type='radio' name='gender' value='female' onChange={this.handleGenderSelect.bind(this)} /></label>
                     </div>
-                    <button onClick={() => {console.log(this);console.log(user); this.props.onAddUser(user)}}>增加</button>
+                    <button onClick={() => { this.props.onAddUser(user) }}>增加</button>
                 </div>
                 {/* 显示用户列表 */}
                 <div className='users-list'>
